@@ -1,0 +1,11 @@
+venv/
+__pycache__/
+*.pyc
+uploads/
+frames/
+static/detected_frames/
+*.mp4
+*.avi
+*.jpg
+*.png
+.env

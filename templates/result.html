@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if accident %}⚠ Accident Detected{% else %}✅ All Clear{% endif %} — AI Accident Detection</title>
+  <meta name="description" content="Detection analysis results from the AI Accident Detection system.">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <!-- Ambient Orbs -->
+  <div class="ambient-bg">
+    <div class="orb"></div>
+    <div class="orb"></div>
+    <div class="orb"></div>
+  </div>
+
+  <!-- Particles -->
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="/" class="nav-brand">
+      <div class="nav-logo">🛡️</div>
+      <div class="nav-name">Accident<span>Detect</span></div>
+    </a>
+    <div class="nav-badge">
+      <span class="pulse-dot"></span>
+      System Online
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="page-container">
+
+    <div class="glass-card result-card">
+
+      {% if accident %}
+      <!-- ======== ACCIDENT DETECTED ======== -->
+
+      <div class="result-header accident">
+        <div class="result-status-icon danger">⚠️</div>
+        <div class="result-title danger">Accident Detected</div>
+        <div class="result-desc">
+          Our AI model detected a potential vehicle collision in the uploaded footage.
+          A Telegram alert has been sent to the configured emergency contact.
+        </div>
+        <div class="telegram-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.28-.02-.12.03-2.07 1.32-5.84 3.87-.55.38-1.05.56-1.5.55-.49-.01-1.44-.28-2.15-.51-.87-.28-1.56-.44-1.5-.92.03-.25.38-.51 1.05-.78 4.12-1.79 6.87-2.97 8.26-3.54 3.94-1.63 4.76-1.92 5.3-1.93.12 0 .37.03.54.17.14.12.18.28.2.47-.01.06.01.24 0 .37z"/></svg>
+          Alert Delivered
+        </div>
+      </div>
+
+      <!-- Detected Frame -->
+      <div class="image-section">
+        <div class="image-frame">
+          <span class="image-label">● Collision Frame</span>
+          <img src="{{ url_for('static', filename='detected_frames/accident.jpg') }}" alt="Detected collision frame">
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-row">
+        <div class="stat-cell">
+          <div class="stat-value">{{ frames_analyzed }}</div>
+          <div class="stat-label">Frames Analyzed</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-value">{{ processing_time }}s</div>
+          <div class="stat-label">Processing Time</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-value">YOLOv8n</div>
+          <div class="stat-label">Model</div>
+        </div>
+      </div>
+
+      {% else %}
+      <!-- ======== ALL CLEAR ======== -->
+
+      <div class="result-header safe">
+        <div class="safe-check">
+          <svg viewBox="0 0 80 80">
+            <circle class="circle-line" cx="40" cy="40" r="36"/>
+            <polyline class="check-line" points="26,42 36,52 56,30"/>
+          </svg>
+        </div>
+        <div class="result-title success">All Clear — No Accident</div>
+        <div class="result-desc">
+          The AI model carefully analyzed every sampled frame and found
+          no evidence of a vehicle collision. The footage appears safe.
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-row">
+        <div class="stat-cell">
+          <div class="stat-value">{{ frames_analyzed }}</div>
+          <div class="stat-label">Frames Analyzed</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-value">{{ processing_time }}s</div>
+          <div class="stat-label">Processing Time</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-value" style="color: var(--green-400);">Safe ✓</div>
+          <div class="stat-label">Status</div>
+        </div>
+      </div>
+
+      {% endif %}
+
+      <!-- Back Button -->
+      <div class="result-footer">
+        <a href="/" class="btn-outline">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+          </svg>
+          Analyze Another Video
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="page-footer">
+      Built with YOLOv8 &amp; Flask — College Project 2026
+    </div>
+
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

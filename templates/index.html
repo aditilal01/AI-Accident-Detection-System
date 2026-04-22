@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Accident Detection — Smart Traffic Safety</title>
+  <meta name="description" content="Upload traffic footage and detect vehicle collisions using YOLOv8 AI. Real-time analysis with instant Telegram alerts.">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <!-- Ambient Orbs -->
+  <div class="ambient-bg">
+    <div class="orb"></div>
+    <div class="orb"></div>
+    <div class="orb"></div>
+  </div>
+
+  <!-- Particles -->
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="/" class="nav-brand">
+      <div class="nav-logo">🛡️</div>
+      <div class="nav-name">Accident<span>Detect</span></div>
+    </a>
+    <div class="nav-badge">
+      <span class="pulse-dot"></span>
+      System Online
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="page-container">
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-icon">🚗</div>
+      <h1>Smart <span class="highlight">Accident</span><br>Detection System</h1>
+      <p>Upload traffic video footage and our AI will analyze every frame using YOLOv8 object detection to identify potential vehicle collisions — with instant Telegram alerts.</p>
+    </div>
+
+    <!-- Upload Card -->
+    <div class="glass-card">
+
+      <!-- Steps -->
+      <div class="step-indicator">
+        <div class="step active" id="step-0">
+          <div class="step-num">1</div>
+          <div class="step-text">Upload</div>
+        </div>
+        <div class="step-line" id="line-0"></div>
+        <div class="step" id="step-1">
+          <div class="step-num">2</div>
+          <div class="step-text">Analyze</div>
+        </div>
+        <div class="step-line" id="line-1"></div>
+        <div class="step" id="step-2">
+          <div class="step-num">3</div>
+          <div class="step-text">Result</div>
+        </div>
+      </div>
+
+      <!-- Upload Form -->
+      <form id="upload-form" method="POST" enctype="multipart/form-data">
+
+        <div class="upload-zone" id="upload-zone">
+          <div class="upload-zone-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4b5563" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+          </div>
+          <h3>Drop your video here</h3>
+          <p>or <span class="link">browse files</span> to select</p>
+          <p style="margin-top:6px; font-size:11px; color:var(--text-muted)">MP4, AVI, MOV — up to 200 MB</p>
+        </div>
+
+        <input type="file" name="video" id="video-input" class="hidden-input" accept="video/*" required>
+
+        <!-- File Info -->
+        <div class="file-info" id="file-info">
+          <img class="file-thumb" id="file-thumb" src="" alt="Thumbnail">
+          <div class="file-meta">
+            <div class="file-name" id="file-name"></div>
+            <div class="file-size" id="file-size"></div>
+          </div>
+          <button type="button" class="file-remove" id="file-remove" title="Remove">&times;</button>
+        </div>
+
+        <!-- Analyze Button -->
+        <button type="submit" class="btn-analyze" id="submit-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          Start Analysis
+        </button>
+
+      </form>
+
+      <!-- Processing -->
+      <div class="processing-section" id="processing-section">
+        <div class="spinner"></div>
+        <div class="processing-label">Analyzing video frames…</div>
+        <div class="processing-sublabel">Running YOLOv8 vehicle detection on every 5th frame</div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- How It Works -->
+    <div class="how-section">
+      <h2>How It Works</h2>
+      <div class="how-grid">
+        <div class="how-card">
+          <div class="how-card-icon">📹</div>
+          <h4>Upload Video</h4>
+          <p>Select traffic camera footage or dashcam video for analysis</p>
+        </div>
+        <div class="how-card">
+          <div class="how-card-icon">🤖</div>
+          <h4>AI Analysis</h4>
+          <p>YOLOv8 detects vehicles and calculates bounding box overlaps</p>
+        </div>
+        <div class="how-card">
+          <div class="how-card-icon">🔔</div>
+          <h4>Instant Alert</h4>
+          <p>If a collision is detected, a Telegram alert is sent immediately</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="page-footer">
+      Built with YOLOv8 &amp; Flask — College Project 2026
+    </div>
+
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
