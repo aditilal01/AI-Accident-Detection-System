@@ -44,23 +44,31 @@ NotificationsTelegram Bot   API
 
 Language                    Python 3.8+
 
-📊 Detection Logic
 
-Collision detection is based on Intersection over Union (IoU) — a standard metric in computer vision for measuring bounding box overlap.
-         Area of Overlap
-IoU = ─────────────────────
-         Area of Union
+## 📊 Detection Logic
+
+Collision detection is based on **Intersection over Union (IoU)** — a standard computer vision metric used to measure bounding box overlap.
+
+IoU = Area of Overlap / Area of Union
+
+### 🚨 Collision Criteria
 A potential collision is flagged when:
 
-IoU > threshold (default: 0.6)
+```
+IoU > threshold (e.g., 0.6)
+```
 
+### ⚙️ Additional Logic
+- Delay-based confirmation to reduce false positives  
+- Multi-frame consistency check  
+- Snapshot captured for alerts  
 False Positive Mitigation:
 
 *The IoU threshold filters out near-miss scenarios
 *A confirmation delay requires the overlap to persist across multiple consecutive frames before an alert is raised — preventing single-frame noise from triggering notifications
 
 
-📁 Project Structure
+
 ## 📁 Project Structure
 
 ```
